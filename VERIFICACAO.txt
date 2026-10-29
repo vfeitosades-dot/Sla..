@@ -1,0 +1,31 @@
+UMBRA 1.0.0 — verificações realizadas
+
+PASSOU
+- Sete testes automatizados: dano e cura; limites de vida; sombra de
+  plataformas; salto; impulso/recarga; espinhos; estrutura das fases;
+  rejeição de estados de rede inválidos (alguns casos agrupados).
+- Interface em Chromium: menu, início, movimento, pausa/continuação,
+  ajuda, validação de código de sala e controles móveis.
+- Inicialização do aplicativo Electron 45.1.0 no Linux em modo de teste,
+  usando o mesmo processo principal e o protocolo local do pacote Windows.
+- Duas instâncias Electron conectaram por WebRTC através de um PeerServer
+  local. Ambas iniciaram e sincronizaram um fragmento coletado de verdade.
+- Nenhum erro JavaScript nos testes de interface e no teste cooperativo
+  bem-sucedido com Electron.
+- APK compilado, alinhado e verificado pelo apksigner: assinaturas v2 e v3.
+- Instalador EXE identificado como PE/NSIS e verificado pelo 7-Zip.
+- Código de jogo extraído do EXE e do APK idêntico ao código-fonte final.
+- Arquivo oficial Electron Windows conferido pelo SHA-256 publicado.
+
+NÃO EXECUTADO
+- Instalação e execução em um Windows físico.
+- Instalação e execução em um Android físico ou emulador Android.
+- Partida pela internet entre dois aparelhos em redes diferentes.
+- Teste de carga, auditoria de segurança e validação de todas as redes NAT.
+
+OBSERVAÇÕES
+O teste WebRTC no Chromium de sistema não reuniu candidatos ICE neste
+ambiente; o teste posterior com o motor Electron conseguiu conectar e
+sincronizar jogadores. Isso não substitui teste em aparelhos reais.
+Não há TURN dedicado nesta versão. O serviço PeerJS Cloud é de terceiros.
+Esta é uma primeira versão jogável, com os limites descritos no LEIA-ME.

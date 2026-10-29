@@ -1,0 +1,1 @@
+{"name":"umbra-alem-da-luz","version":"1.0.0","type":"module","private":true,"description":"Jogo 2D para Windows e Android","scripts":{"test":"node --test tests/*.test.mjs"}}

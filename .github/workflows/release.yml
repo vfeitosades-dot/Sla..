@@ -1,0 +1,51 @@
+name: Compilar e publicar UMBRA
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'dist/**'
+      - 'native/**'
+      - 'scripts/build-windows.sh'
+      - 'builds/**'
+      - '.github/workflows/release.yml'
+permissions:
+  contents: read
+concurrency:
+  group: umbra-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verificar regras do jogo
+        run: node tests/core.test.mjs
+      - name: Instalar compilador do instalador
+        run: sudo apt-get update -qq && sudo apt-get install -y nsis
+      - name: Compilar instalador Windows
+        run: bash scripts/build-windows.sh
+      - name: Preparar arquivos
+        run: |
+          cp builds/UMBRA-Android.apk output/
+          cp LEIA-ME.txt VERIFICACAO.txt output/
+          git archive --format=zip --output=output/UMBRA-Codigo-Fonte.zip HEAD
+          cd output
+          sha256sum UMBRA-Windows-Instalar.exe UMBRA-Android.apk UMBRA-Codigo-Fonte.zip > SHA256SUMS.txt
+      - name: Publicar downloads
+        env:
+          GH_TOKEN: ${{ github.token }}
+          UMBRA_REPO: ${{ github.repository }}
+          UMBRA_COMMIT: ${{ github.sha }}
+          UMBRA_RUN: ${{ github.run_number }}
+        run: |
+          gh release create "umbra-v1.0.0-r${UMBRA_RUN}" \
+            --repo "$UMBRA_REPO" --target "$UMBRA_COMMIT" \
+            --title "UMBRA 1.0.0 — Windows e Android" \
+            --notes-file RELEASE_NOTES.md \
+            output/UMBRA-Windows-Instalar.exe output/UMBRA-Android.apk \
+            output/UMBRA-Codigo-Fonte.zip output/LEIA-ME.txt \
+            output/VERIFICACAO.txt output/SHA256SUMS.txt

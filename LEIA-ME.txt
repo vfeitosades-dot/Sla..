@@ -1,0 +1,74 @@
+UMBRA — ALÉM DA LUZ
+Versão 1.0.0 · Windows e Android · 29 de outubro de 2026
+
+O JOGO
+Você controla uma sombra preta de olhos brancos. Feixes de lanternas
+consomem sua essência; a escuridão recupera sua vida. Plataformas
+bloqueiam a luz e criam abrigos. Colete os seis fragmentos de cada fase
+e alcance o portal. Há três fases, impulso, espinhos, pontos de retorno,
+sons sintetizados e progresso local. A arte é desenhada pelo próprio jogo.
+
+INSTALAR NO WINDOWS
+Abra UMBRA-Windows-Instalar.exe. O instalador cria atalhos e instala
+no seu usuário, sem exigir privilégios de administrador.
+Requisitos: Windows 10/11 de 64 bits. O motor está incluído; não precisa
+instalar Node.js nem abrir um navegador. O modo solo funciona offline.
+Este EXE não tem certificado comercial de assinatura de código;
+o Windows pode exibir um aviso de editor desconhecido.
+
+INSTALAR NO ANDROID
+Transfira UMBRA-Android.apk para o celular e abra o arquivo.
+Se solicitado, permita a instalação por esse gerenciador de arquivos.
+Requisitos: Android 8 ou superior, com Android System WebView atualizado.
+O aplicativo abre na horizontal. O conteúdo do modo solo está no APK.
+O APK usa assinatura de desenvolvimento válida; não é uma publicação
+na Play Store. Só solicita acesso à internet, usado no cooperativo.
+
+CONTROLES
+PC: A/D ou setas para mover; espaço/W/seta para cima para pular;
+segure o salto para alcançar plataformas mais altas; Shift para impulso;
+Esc/P para pausar; F11 para alternar tela cheia.
+Android: botões à esquerda para mover, seta para cima para pular,
+seta dupla para impulso e botão de pausa no canto superior.
+O impulso atravessa a luz por um curto período e precisa recarregar.
+Obeliscos são pontos de retorno. Cair ou perder toda a essência faz
+você renascer no último refúgio, mantendo os fragmentos da fase.
+
+JOGAR EM DUPLA
+1. Os dois jogadores precisam ter a versão 1.0.0 e conexão à internet.
+2. Um escolhe “Jogar com amigo”, depois “Criar sala”.
+3. O outro digita o código de seis caracteres em “Entrar na sala”.
+4. Quando os dois estiverem conectados, o criador inicia a partida.
+5. Os fragmentos são compartilhados. O criador conduz a troca de fase.
+O menu não pausa uma partida online. Se o parceiro sair, é possível
+continuar solo. Não há chat, anúncios, contas ou compras no jogo.
+
+LIMITES DO ONLINE
+A conexão usa WebRTC e o serviço público PeerServer Cloud para
+encontrar a outra pessoa. Não foi contratado um servidor TURN dedicado.
+Algumas redes móveis, VPNs, redes empresariais e NATs restritivos podem
+impedir a conexão direta. Nesse caso, tente outra rede. O serviço de
+sinalização de terceiros também pode ficar indisponível.
+É uma primeira versão, sem matchmaking, reconexão automática, proteção
+contra trapaças ou garantia de disponibilidade contínua.
+
+PROGRESSO E PRIVACIDADE
+O progresso solo é salvo no aparelho. Partidas não ficam em um servidor.
+O código de sala funciona como convite: compartilhe apenas com quem
+você quer jogar. A sinalização e a conexão entre jogadores usam rede.
+
+FONTES E LICENÇAS
+Fontes: Press Start 2P e Space Grotesk, sob SIL Open Font License.
+Conexão: PeerJS 1.5.5, MIT. Windows: Electron 45.1.0 e seus componentes.
+As licenças de terceiros acompanham os arquivos internos do aplicativo.
+As imagens de referência pesquisadas não foram copiadas para o jogo.
+
+DOCUMENTAÇÃO CONSULTADA
+PeerJS, conexão entre jogadores e limites de NAT:
+https://peerjs.com/client/faq
+Electron, empacotamento de aplicativos:
+https://www.electronjs.org/docs/latest/tutorial/application-distribution
+Android, conteúdo local no aplicativo:
+https://developer.android.com/develop/ui/views/layout/webapps/load-local-content
+Referência visual de floresta em pixel art (apenas pesquisa):
+https://www.gameatomic.com/press-kraino-rebirth

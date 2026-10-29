@@ -1,0 +1,11 @@
+/work/
+/output/
+/node_modules/
+/native/windows/
+/native/android/build/
+*.jks
+*.keystore
+*.idsig
+.openai/
+tests/*.png
+tests/*.log

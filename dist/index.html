@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b0b14"><meta name="description" content="Você é uma sombra. A luz te desfaz. A escuridão te devolve. Um jogo de plataforma em pixel art para PC e celular."><title>UMBRA — Além da luz</title><link rel="icon" href="assets/icon.svg"><link rel="stylesheet" href="style.css"></head>
+<body>
+<header class="topbar"><a class="brand" href="#" id="brand" aria-label="UMBRA, início"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h3V2h6v3h3v3h3v13h-5v-3h-3v3H9v-3H6v3H3V8h3Z" fill="currentColor"/><path d="M7 10h3v4H7zm7 0h3v4h-3z" fill="#0b0b14"/></svg>UMBRA<span class="brand-sub">ALÉM DA LUZ</span></a><nav aria-label="Menu principal"><button class="nav-link selected" id="nav-play">Jogar</button><button class="nav-link" id="nav-help">Como jogar</button><button class="nav-link" id="nav-world">O universo</button></nav><div class="header-right"><span class="version"><i></i> V1.0 · EXPEDIÇÃO NOTURNA</span><button class="icon-btn" id="audio" title="Ativar som" aria-label="Ativar som">♫<span class="sound-off">×</span></button></div></header>
+<main>
+<div class="eyebrow"><span><b class="tiny-star">✦</b> UMA PEQUENA SOMBRA. UM MUNDO IMENSO.</span><span class="platforms">PC <span>+</span> CELULAR</span></div>
+<section class="game-frame" id="game-frame" aria-label="Jogo Umbra">
+<canvas id="game" width="640" height="360" tabindex="0" aria-label="Jogo de plataforma. Use A e D para mover, espaço para pular e shift para deslizar."></canvas>
+<div class="vignette"></div>
+<div class="scene-label" id="scene-label"><span class="small-dot"></span> FLORESTA DO SILÊNCIO <span>01 / 03</span></div>
+<div class="menu" id="menu"><div class="chapter-tag">UMA AVENTURA ENTRE LUZ E ESCURIDÃO</div><h1>UMBRA</h1><div class="subtitle"><span></span> ALÉM DA LUZ <span></span></div><p>Nem toda escuridão é um perigo.<br>Às vezes, ela é o seu lar.</p><button class="primary" id="play"><span class="play-triangle">▶</span> JOGAR SOLO <span class="arrow">→</span></button><button class="secondary" id="online"><svg viewBox="0 0 22 20" aria-hidden="true"><path d="M5 4h4v5H5zm8 0h4v5h-4zM2 12h10v5H2zm12 0h6v5h-6z" fill="currentColor"/></svg> JOGAR COM AMIGO <span class="pill">ONLINE</span></button><span class="menu-note">Sem pressa. Encontre seu caminho nas sombras.</span></div>
+<div class="hero-caption" id="hero-caption"><span class="line"></span> A LUZ REVELA.<br><strong>A SOMBRA PROTEGE.</strong></div>
+<div class="hud hidden" id="hud"><div class="health-panel"><div class="hud-label"><span id="health-label">ESSÊNCIA</span><b id="health-number">100%</b></div><div class="health-track"><div id="health-fill"></div></div><div id="shade-status">● Nas sombras · recuperando</div></div><div class="hud-center"><span id="stage-label">01 · FLORESTA DO SILÊNCIO</span><b id="crystals">◇ 0 / 6</b><small id="partner-status"></small></div><button class="pause-btn" id="pause" aria-label="Pausar">Ⅱ</button></div>
+<div class="game-hint hidden" id="game-hint">Encontre os 6 fragmentos e alcance o portal.</div>
+<div class="dash-meter hidden" id="dash-meter"><span>⇢ IMPULSO</span><div><i id="dash-fill"></i></div><kbd>SHIFT</kbd></div>
+<div class="touch-controls hidden" id="touch-controls"><div class="touch-left"><button data-control="left" aria-label="Mover para a esquerda">◀</button><button data-control="right" aria-label="Mover para a direita">▶</button></div><div class="touch-right"><button data-control="dash" aria-label="Impulso">⇢</button><button class="jump-touch" data-control="jump" aria-label="Pular">↑</button></div></div>
+<div class="frame-bottom" id="frame-bottom"><span><i class="small-dot"></i> FEITO PARA EXPLORAR</span><button id="fullscreen" aria-label="Tela cheia">TELA CHEIA <span>⛶</span></button></div>
+<div id="toast" role="status" class="toast hidden"></div>
+</section>
+<div class="below-game"><div class="mechanic"><span class="mechanic-icon sun">☼</span><div><h3>A luz consome</h3><p>Evite os feixes. Preserve sua essência.</p></div></div><div class="mechanic"><span class="mechanic-icon moon">☾</span><div><h3>A sombra acolhe</h3><p>Respire no escuro. Volte a ser inteiro.</p></div></div><div class="mechanic"><span class="mechanic-icon crystal">◇</span><div><h3>Encontre o caminho</h3><p>Reúna fragmentos. Desperte os portais.</p></div></div></div>
+<footer><span>UMA JORNADA FEITA DE PEQUENOS PIXELS.</span><button id="downloads">Baixar para PC e Android <span>↗</span></button><span class="footer-right">ENTRE. EXPLORE. PERMANEÇA.</span></footer>
+</main>
+<dialog id="modal"><button class="close-modal" id="close-modal" aria-label="Fechar">×</button><div id="modal-content"></div></dialog>
+<script src="assets/peerjs.min.js"></script><script type="module" src="game.js"></script>
+</body></html>
