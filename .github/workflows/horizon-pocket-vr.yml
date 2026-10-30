@@ -1,0 +1,42 @@
+name: Horizon Pocket VR · Build APK
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'horizon-pocket-vr/**'
+      - '.github/workflows/horizon-pocket-vr.yml'
+permissions:
+  contents: write
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract application sources
+        run: |
+          cd horizon-pocket-vr
+          base64 --decode source.tar.gz.b64 | tar -xz
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - name: Install Android SDK
+        run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
+      - name: Build signed Android APK
+        run: bash horizon-pocket-vr/build.sh
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Horizon-Pocket-VR-APK
+          path: horizon-pocket-vr/output/Horizon-Pocket-VR.apk
+      - name: Publish APK as GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "horizon-pocket-vr-${GITHUB_RUN_NUMBER}" \
+            --title "Horizon Pocket VR · Preview ${GITHUB_RUN_NUMBER}" \
+            --notes "Preview Android com ambiente 3D, biblioteca, janelas flutuantes e modo VR Box. Projeto independente, não é Meta Quest oficial." \
+            horizon-pocket-vr/output/Horizon-Pocket-VR.apk
