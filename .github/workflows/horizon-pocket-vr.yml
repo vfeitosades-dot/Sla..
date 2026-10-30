@@ -29,6 +29,21 @@ jobs:
           test -n "$SDKMGR"
           yes | "$SDKMGR" --licenses > /dev/null || true
           "$SDKMGR" "platforms;android-35" "build-tools;35.0.0"
+      - name: Bundle offline hand tracking model
+        run: |
+          mkdir -p horizon-pocket-vr/assets/vendor/hands
+          npm install --no-save --ignore-scripts --no-audit --prefix /tmp/horizon-hands @mediapipe/hands@0.4.1675469240
+          cp -R /tmp/horizon-hands/node_modules/@mediapipe/hands/. horizon-pocket-vr/assets/vendor/hands/
+          test -s horizon-pocket-vr/assets/vendor/hands/hands.js
+          du -sh horizon-pocket-vr/assets/vendor/hands
+      - name: Validate JavaScript syntax
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path('horizon-pocket-vr/assets/index.html').read_text()
+          Path('/tmp/horizon-app.js').write_text(s.split('<script>',1)[1].split('</script>',1)[0])
+          PY
+          node --check /tmp/horizon-app.js
       - name: Build signed Android APK
         run: bash horizon-pocket-vr/build.sh
       - name: Upload APK artifact
@@ -40,7 +55,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "horizon-pocket-vr-${GITHUB_RUN_NUMBER}" \
-            --title "Horizon Pocket VR · Preview ${GITHUB_RUN_NUMBER}" \
-            --notes "Preview Android com ambiente 3D, biblioteca, janelas flutuantes e modo VR Box. Projeto independente, não é Meta Quest oficial." \
+          gh release create "horizon-pocket-vr-2-${GITHUB_RUN_NUMBER}" \
+            --title "Horizon Pocket VR · v2 · mãos 3D e sensores · build ${GITHUB_RUN_NUMBER}" \
+            --notes "V2 Android: mãos 3D articuladas; rastreamento MediaPipe local pela câmera traseira; rotação com sensores Android (vetor de rotação ou acelerômetro+bússola); fluxo óptico e modo VR Box. Sem 6DoF e sujeito a limitações da câmera e dos sensores. Build de desenvolvimento, sem testes em aparelho físico." \
             horizon-pocket-vr/output/Horizon-Pocket-VR.apk
