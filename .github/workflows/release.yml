@@ -6,7 +6,8 @@ on:
     paths:
       - 'dist/**'
       - 'native/**'
-      - 'scripts/build-windows.sh'
+      - 'scripts/**'
+      - 'tests/*.test.mjs'
       - 'builds/**'
       - '.github/workflows/release.yml'
 permissions:
@@ -23,7 +24,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Verificar regras do jogo
-        run: node tests/core.test.mjs
+        run: node --test tests/*.test.mjs
+      - name: Conferir APK e código-fonte
+        run: python3 scripts/verify-package.py builds/UMBRA-Android.apk
       - name: Instalar compilador do instalador
         run: sudo apt-get update -qq && sudo apt-get install -y nsis
       - name: Compilar instalador Windows
@@ -42,9 +45,9 @@ jobs:
           UMBRA_COMMIT: ${{ github.sha }}
           UMBRA_RUN: ${{ github.run_number }}
         run: |
-          gh release create "umbra-v1.0.0-r${UMBRA_RUN}" \
+          gh release create "umbra-v2.0.0-r${UMBRA_RUN}" \
             --repo "$UMBRA_REPO" --target "$UMBRA_COMMIT" \
-            --title "UMBRA 1.0.0 — Windows e Android" \
+            --title "UMBRA 2.0.0 — Ecos do Eclipse" \
             --notes-file RELEASE_NOTES.md \
             output/UMBRA-Windows-Instalar.exe output/UMBRA-Android.apk \
             output/UMBRA-Codigo-Fonte.zip output/LEIA-ME.txt \

@@ -15,6 +15,7 @@ fi
 echo "$UMBRA_ELECTRON_SHA  $UMBRA_ZIP" | sha256sum --check --status
 unzip -oq "$UMBRA_ZIP" -d "$UMBRA_APP"
 mv -f "$UMBRA_APP/electron.exe" "$UMBRA_APP/UMBRA.exe"
+rm -rf "$UMBRA_APP/resources/app/game"
 mkdir -p "$UMBRA_APP/resources/app/game"
 cp "$UMBRA_ROOT/native/electron/main.cjs" "$UMBRA_ROOT/native/electron/package.json" "$UMBRA_ROOT/native/electron/icon.ico" "$UMBRA_APP/resources/app/"
 cp -R "$UMBRA_ROOT/dist/." "$UMBRA_APP/resources/app/game/"

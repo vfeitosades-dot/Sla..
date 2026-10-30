@@ -7,6 +7,7 @@ ECJ=${UMBRA_ECJ:-/workspace/work/toolchain/ecj.jar}
 SIGNING_KEY=${UMBRA_KEYSTORE:-/workspace/work/toolchain/umbra-development.jks}
 OUT=${UMBRA_OUTPUT:-/workspace/outputs/umbra}
 BUILD="$ROOT/native/android/build"
+rm -rf "$BUILD/classes" "$BUILD/dex" "$BUILD/assets"
 mkdir -p "$BUILD/classes" "$BUILD/dex" "$BUILD/assets" "$OUT"
 cp -R "$ROOT/dist/." "$BUILD/assets/"
 "$SDK_TOOLS/aapt2" compile --dir "$ROOT/native/android/res" -o "$BUILD/resources.zip"
@@ -35,4 +36,4 @@ if [ ! -f "$SIGNING_KEY" ]; then
 fi
 "$SDK_TOOLS/apksigner" sign --ks "$SIGNING_KEY" --ks-key-alias umbra --ks-pass pass:android --key-pass pass:android --out "$OUT/UMBRA-Android.apk" "$BUILD/aligned.apk"
 "$SDK_TOOLS/apksigner" verify --verbose "$OUT/UMBRA-Android.apk"
-"$SDK_TOOLS/aapt" dump badging "$OUT/UMBRA-Android.apk" | head -7
+"$SDK_TOOLS/aapt" dump badging "$OUT/UMBRA-Android.apk" | sed -n '1,7p'

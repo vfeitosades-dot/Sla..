@@ -15,7 +15,7 @@ app.whenReady().then(()=>{
     return net.fetch(pathToFileURL(filename).href);
   });
   Menu.setApplicationMenu(null);
-  mainWindow=new BrowserWindow({width:1320,height:900,minWidth:800,minHeight:600,title:'UMBRA — Além da luz',backgroundColor:'#0b0b14',icon:path.join(__dirname,'icon.ico'),autoHideMenuBar:true,webPreferences:{nodeIntegration:false,contextIsolation:true,sandbox:true,webSecurity:true}});
+  mainWindow=new BrowserWindow({width:1320,height:900,minWidth:800,minHeight:600,title:'UMBRA — Ecos do Eclipse',backgroundColor:'#0b0b14',icon:path.join(__dirname,'icon.ico'),autoHideMenuBar:true,webPreferences:{nodeIntegration:false,contextIsolation:true,sandbox:true,webSecurity:true}});
   mainWindow.webContents.setWindowOpenHandler(()=>({action:'deny'}));
   mainWindow.webContents.on('will-navigate',(event,url)=>{if(!url.startsWith('umbra://app/'))event.preventDefault();});
   mainWindow.webContents.session.setPermissionRequestHandler((_contents,permission,callback)=>callback(permission==='fullscreen'||permission==='clipboard-sanitized-write'));
