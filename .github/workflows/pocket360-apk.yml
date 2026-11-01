@@ -1,0 +1,41 @@
+name: Pocket360 APK Android
+on:
+  push:
+    branches: [main]
+    paths:
+      - "pocket360/**"
+      - ".github/workflows/pocket360-apk.yml"
+  workflow_dispatch:
+jobs:
+  pocket360:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Descompactar o projeto Pocket360
+        run: |
+          mkdir -p pocket360/android
+          base64 -d pocket360/source.tar.xz.b64 | tar -xJ -C pocket360/android
+      - name: Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Android SDK
+        uses: android-actions/setup-android@v3
+      - name: Gradle 8.9
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+      - name: Android SDK 35
+        run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
+      - name: Gerar APK instalável
+        run: gradle -p pocket360/android --no-daemon :app:assembleDebug
+      - name: Disponibilizar APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Pocket360-Android-APK
+          path: pocket360/android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
