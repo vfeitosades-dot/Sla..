@@ -10,7 +10,7 @@ jobs:
   pocket360:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -39,3 +39,14 @@ jobs:
           name: Pocket360-Android-APK
           path: pocket360/android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
+
+      - name: Publicar APK com link direto
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cp pocket360/android/app/build/outputs/apk/debug/app-debug.apk Pocket360.apk
+          if gh release view pocket360-v1.0 >/dev/null 2>&1; then
+            gh release upload pocket360-v1.0 Pocket360.apk --clobber
+          else
+            gh release create pocket360-v1.0 Pocket360.apk --title "Pocket360 Android" --notes "Pocket360: controle Android para Xbox 360 RGH. Requer controlleremu.xex configurado."
+          fi
