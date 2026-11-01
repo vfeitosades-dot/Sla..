@@ -1,0 +1,25 @@
+name: Baixar APK Xbox 360 Android
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/build-pocket360.yml'
+permissions:
+  contents: read
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar APK oficial do projeto x360controller
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p output
+          curl -fL --retry 3 -o output/360controller.apk https://github.com/SaveEditors/x360controller/releases/download/v1.0/360controller.apk
+          test -s output/360controller.apk
+          file output/360controller.apk
+      - name: Disponibilizar APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Xbox360-Android-APK
+          path: output/360controller.apk
